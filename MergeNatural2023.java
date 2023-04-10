@@ -39,7 +39,7 @@ public class MergeNatural2023 {
         while (true)
         {
             // 判斷 (1) 是否超出陣列 (2) 判斷前後 2 個直是否相等, 若小於或相等會回傳 true, 大於回傳 false
-            if (endIndex2 < endIndex && !(a[endIndex2] == a[endIndex2+1]) == (less(a[endIndex2], a[endIndex2+1]))){
+            if (endIndex2 < endIndex && (!(a[endIndex2] == a[endIndex2+1]) == (less(a[endIndex2], a[endIndex2+1])))){
                 endIndex2++; // end 位置往下找
             }
             // 找到該 run 的 end, break
@@ -69,8 +69,8 @@ public class MergeNatural2023 {
         // 當還沒找到 a 的最後一個元素（等於最後一個 run）就繼續找
         while (end != a.length-1){
             end = _merge.findNextRun(a, end+1); // 找 run, start 為前一 run 的 end 下一個位置
-            end_list[end_index] = end; // 加入 end_list
-            end_index++; // 往下移一格
+            end_list[end_index++] = end; // 加入 end_list
+            // end_index++; // 往下移一格
         }
         // 每兩個 run 進行 merge
         for (int i=0; i<end_list.length; i=i+2){
