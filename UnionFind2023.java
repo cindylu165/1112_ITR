@@ -1,4 +1,4 @@
-//todo: student 1 id & name, student 2 id & name
+//todo: student 1 M114020017 & 張宸瑜, student 2 M114020002 & 呂心慈
 //todo: write code for nodesWithDepthOfTreeHeight method, see details in class slides
 //todo (optional): write code for componentSize method, see details in class slides
 //DO NOT EDIT other functions NOR add global variables.
@@ -94,13 +94,45 @@ public class UnionFind2023 {
 	    // todo: complete the method below to return a list of nodes in the same tree as node p, 
 	    // that have the depth of the tree's height. 
 	    public int[] nodesWithDepthOfTreeHeight(int p) {
-	    	
+			// 存放每個 node 的深度
+			int[] deeplist = new int[10];
+			// 存放每個 node 的樹根
+			int[] rootlist = new int[10];
+			// 找樹根
+			int rootP = find(p);
+			// 樹高
+			int max = 0;
+			// 計算同一棵樹的樹高與每個節點的深度
+			for (int i = 0; i < 10; i++){
+				// rootlist[i] = find(i); // 找樹根
+				int count = 0;
+				if (find(i) == rootP){ // 屬於同一棵樹的才找
+					int tmp=i;
+					while (tmp != parent[tmp]){ // 不等於就是有 parent node
+						tmp = parent[tmp];
+						count++;
+					}
+					deeplist[i] = count;
+					if (count > max) max = count;
+				}	
+			}
+			int[] results = new int[deeplist.length];
+			int tmp=0;
+			// 找出深度等於樹高的 node 數量
+			for (int i = 0; i < deeplist.length; i++){
+				results[i] = -1;
+				if(deeplist[i] == max){
+					results[tmp] = i;
+					tmp = tmp+1;
+				}
+			}
+			return results;
 	    }
 	    
 	    // (optional) todo: complete the method to return the size of the connected component with item p.
-	    public int componentSize(int p) {
+	    // public int componentSize(int p) {
 	    	
-	    }
+	    // }
 	    
 	    public static void printNodes(int[] nodes, int node) {
 	    	int i;
@@ -133,7 +165,7 @@ public class UnionFind2023 {
 		uf.printNodes(uf.nodesWithDepthOfTreeHeight(7), 7); // expected output 7,8,9
 
 		System.out.println();
-		System.out.println("Component size of 1 = " + uf.componentSize(1)); // expected output 6
-		System.out.println("Component size of 6 = " + uf.componentSize(6)); // expected output 4
+		// System.out.println("Component size of 1 = " + uf.componentSize(1)); // expected output 6
+		// System.out.println("Component size of 6 = " + uf.componentSize(6)); // expected output 4
 	}
 }
