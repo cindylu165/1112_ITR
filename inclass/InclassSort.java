@@ -4,30 +4,53 @@
 
 public class InclassSort {
 	// todo: write code in this function
+	// public int[] sort(int[] a) {
+	// 	int[] result = new int[a.length];
+	// 	int indexi = 0;
+	// 	int indexj = a.length-1;
+	// 	for (int i = 0; i < a.length; i++)
+    //         for (int j = i; j > 0; j--)
+    //             if (a[j] < a[j-1])
+	// 			{
+	// 				int tmp = a[j];
+	// 				a[j] = a[j-1];
+	// 				a[j-1] = tmp;
+	// 			}
+    //             else break;
+	// 	for (int i=0; i<a.length; i++){
+	// 		if (i % 2 == 0){
+	// 			result[i] = a[indexj];
+	// 			indexj = indexj - 1;
+	// 		}
+	// 		else{
+	// 			result[i] = a[indexi];
+	// 			indexi = indexi + 1;
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 	public int[] sort(int[] a) {
-		int[] result = new int[a.length];
-		int indexi = 0;
-		int indexj = a.length-1;
-		for (int i = 0; i < a.length; i++)
-            for (int j = i; j > 0; j--)
-                if (a[j] < a[j-1])
-				{
-					int tmp = a[j];
-					a[j] = a[j-1];
-					a[j-1] = tmp;
+            
+		for (int i = 0; i < a.length; i++){
+			int index = i;
+			for (int j = i; j < a.length; j++){
+				if (i % 2 == 0){
+					if(a[index] < a[j])
+						index = j;
 				}
-                else break;
-		for (int i=0; i<a.length; i++){
-			if (i % 2 == 0){
-				result[i] = a[indexj];
-				indexj = indexj - 1;
+				else{
+					if(a[index] > a[j])
+						index = j;
+				}
 			}
-			else{
-				result[i] = a[indexi];
-				indexi = indexi + 1;
+			if(index != i){
+				int tmp = a[index];
+				a[index] = a[i];
+				a[i] = tmp;
 			}
+			
 		}
-		return result;
+		return a;
 	}
 	
 	public static void printSorted(int[] sorted) {
